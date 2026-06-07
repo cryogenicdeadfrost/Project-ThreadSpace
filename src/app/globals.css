@@ -1,26 +1,451 @@
 @import "tailwindcss";
 
+/* ============================================================
+   THREADSPACE — Design System
+   Dark-mode-first · Graph-native · Teal → Amber → Coral ramp
+   ============================================================ */
+
+/* ---------- Core Theme Tokens ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background layers */
+  --bg-deep: #05080f;
+  --bg-surface: #0b1120;
+  --bg-elevated: #111b30;
+  --bg-card: #152038;
+  --bg-hover: #1a2845;
+
+  /* Foreground */
+  --fg-primary: #e8ecf4;
+  --fg-secondary: #8892a8;
+  --fg-muted: #4d5873;
+  --fg-accent: #db2777;  /* Magenta */
+
+  /* Hot-Cold Ramp - Brighter purple/indigo color profile */
+  --cold: #c084fc;       /* purple-400 */
+  --cold-teal: #60d4c8;  /* teal-400 */
+  --warm: #f59e0b;       /* amber-500 */
+  --hot: #f43f5e;        /* rose-500 */
+
+  /* Brand */
+  --brand-primary: #ec4899; /* Hot Pink */
+  --brand-glow: rgba(236, 72, 153, 0.15);
+  --brand-glow-strong: rgba(236, 72, 153, 0.3);
+
+  /* Glass */
+  --glass-bg: rgba(11, 17, 32, 0.65);
+  --glass-border: rgba(236, 72, 153, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+.light {
+  /* Background layers */
+  --bg-deep: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5f9;
+  --bg-card: #f8fafc;
+  --bg-hover: #e2e8f0;
+
+  /* Foreground */
+  --fg-primary: #0f172a;
+  --fg-secondary: #475569;
+  --fg-muted: #94a3b8;
+  --fg-accent: #db2777;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(236, 72, 153, 0.16);
+  --glass-shadow: 0 8px 32px rgba(148, 163, 184, 0.15);
+}
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-glacial: 800ms;
+}
+
+/* ---------- Tailwind v4 Theme Mapping ---------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg-deep);
+  --color-foreground: var(--fg-primary);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-card: var(--bg-card);
+  --color-hover: var(--bg-hover);
+  --color-muted: var(--fg-muted);
+  --color-secondary: var(--fg-secondary);
+  --color-accent: var(--fg-accent);
+  --color-cold: var(--cold);
+  --color-cold-teal: var(--cold-teal);
+  --color-warm: var(--warm);
+  --color-hot: var(--hot);
+  --color-brand: var(--brand-primary);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---------- Base Styles ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-deep);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(96, 212, 200, 0.25);
+  color: #fff;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fg-muted);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-secondary);
+}
+
+/* ---------- Glassmorphism Utilities ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-subtle {
+  background: rgba(11, 17, 32, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(96, 212, 200, 0.06);
+}
+
+/* ---------- Glow Effects ---------- */
+.glow-teal {
+  box-shadow: 0 0 20px rgba(96, 212, 200, 0.15),
+              0 0 60px rgba(96, 212, 200, 0.05);
+}
+
+.glow-warm {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15),
+              0 0 60px rgba(245, 158, 11, 0.05);
+}
+
+.glow-hot {
+  box-shadow: 0 0 20px rgba(249, 112, 102, 0.2),
+              0 0 60px rgba(249, 112, 102, 0.08);
+}
+
+/* ---------- Graph Node Styles ---------- */
+.graph-node {
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo),
+              filter var(--duration-normal) var(--ease-out-expo);
+  will-change: transform, box-shadow;
+}
+
+.graph-node:hover {
+  transform: scale(1.08);
+  z-index: 10;
+}
+
+.graph-node--cold {
+  background: radial-gradient(ellipse at 30% 30%, rgba(56, 189, 248, 0.2), transparent 70%);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.graph-node--warm {
+  background: radial-gradient(ellipse at 30% 30%, rgba(245, 158, 11, 0.2), transparent 70%);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.graph-node--hot {
+  background: radial-gradient(ellipse at 30% 30%, rgba(249, 112, 102, 0.25), transparent 70%);
+  border-color: rgba(249, 112, 102, 0.4);
+}
+
+/* ---------- Edge Styles ---------- */
+.edge-explicit {
+  stroke: var(--fg-muted);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.edge-inferred {
+  stroke: var(--fg-muted);
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
+  opacity: 0.5;
+}
+
+.edge-active {
+  stroke: var(--brand-primary);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+  animation: edge-flow 1.5s linear infinite;
+}
+
+/* ---------- Keyframe Animations ---------- */
+@keyframes edge-flow {
+  to { stroke-dashoffset: -24; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-radius, 120px)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(var(--orbit-radius, 120px)) rotate(-360deg); }
+}
+
+/* ---------- Utility Animations ---------- */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(96, 212, 200, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s var(--ease-out-expo) forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.5s var(--ease-out-expo) forwards;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s var(--ease-out-expo) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+
+/* ---------- Search Styles ---------- */
+.search-input {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.search-input:focus-within {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-glow),
+              0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+}
+
+.search-result {
+  transition: all var(--duration-fast) ease;
+  border-radius: var(--radius-md);
+}
+
+.search-result:hover {
+  background: var(--bg-hover);
+  transform: translateX(4px);
+}
+
+/* ---------- Temperature Gradient ---------- */
+.temp-gradient {
+  background: linear-gradient(90deg, var(--cold) 0%, var(--cold-teal) 25%, var(--warm) 60%, var(--hot) 100%);
+}
+
+/* ---------- Background Mesh ---------- */
+.bg-mesh {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(96, 212, 200, 0.06), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(56, 189, 248, 0.04), transparent),
+    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(249, 112, 102, 0.03), transparent);
+}
+
+/* ---------- React Flow Overrides ---------- */
+.react-flow__background {
+  background: var(--bg-deep) !important;
+}
+
+.react-flow__minimap {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.react-flow__controls {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
+
+.react-flow__controls button {
+  background: transparent !important;
+  border: none !important;
+  color: var(--fg-secondary) !important;
+  transition: color var(--duration-fast) ease !important;
+}
+
+.react-flow__controls button:hover {
+  color: var(--brand-primary) !important;
+  background: var(--bg-hover) !important;
+}
+
+/* ---------- Dot Grid Pattern ---------- */
+.dot-grid {
+  background-image: radial-gradient(circle, var(--fg-muted) 0.5px, transparent 0.5px);
+  background-size: 32px 32px;
+  opacity: 0.3;
+}
+
+/* ---------- Accessibility & Visually Impaired Styles ---------- */
+
+/* Large Text Sizing */
+.text-large {
+  font-size: 1.15rem; /* Increase base font size by 15% */
+}
+.text-large h1, .text-large .text-2xl {
+  font-size: 1.85rem !important;
+}
+.text-large h2, .text-large .text-xl {
+  font-size: 1.5rem !important;
+}
+.text-large p, .text-large .text-sm {
+  font-size: 1rem !important;
+}
+.text-large span, .text-large .text-xs {
+  font-size: 0.85rem !important;
+}
+
+/* High Contrast mode */
+.high-contrast {
+  --bg-deep: #000000 !important;
+  --bg-surface: #000000 !important;
+  --bg-elevated: #111111 !important;
+  --bg-card: #000000 !important;
+  --bg-hover: #222222 !important;
+  --fg-primary: #ffffff !important;
+  --fg-secondary: #f3f4f6 !important;
+  --fg-muted: #d1d5db !important;
+  --glass-bg: #000000 !important;
+  --glass-border: #ffffff !important;
+  --brand-primary: #ff00ff !important; /* maximum contrast magenta */
+  border-width: 1px !important;
+}
+
+.high-contrast button, .high-contrast input, .high-contrast textarea {
+  border: 1.5px solid #ffffff !important;
+  outline: none !important;
+}
+
+.high-contrast button:focus, .high-contrast input:focus, .high-contrast textarea:focus {
+  border-color: #ff00ff !important;
+  box-shadow: 0 0 0 2px #ff00ff !important;
+}
+
+/* Reduced Motion Override */
+.reduced-motion * {
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
 }
