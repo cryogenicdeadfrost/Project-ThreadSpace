@@ -56,7 +56,7 @@
   --glass-border: rgba(236, 72, 153, 0.16);
   --glass-shadow: 0 8px 32px rgba(148, 163, 184, 0.15);
 }
-
+:root {
   /* Radii */
   --radius-sm: 6px;
   --radius-md: 12px;
