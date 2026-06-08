@@ -77,13 +77,13 @@ import { pullThread } from "@/app/actions/traverse";
 function scoreToColor(score: number): string {
   if (score < 0.3) {
     const p = score / 0.3;
-    return lerpColor([56, 189, 248], [45, 212, 191], p);
+    return lerpColor([192, 132, 252], [244, 114, 182], p);
   } else if (score < 0.6) {
     const p = (score - 0.3) / 0.3;
-    return lerpColor([45, 212, 191], [245, 158, 11], p);
+    return lerpColor([244, 114, 182], [251, 146, 60], p);
   } else {
     const p = (score - 0.6) / 0.4;
-    return lerpColor([245, 158, 11], [249, 112, 102], p);
+    return lerpColor([251, 146, 60], [251, 113, 133], p);
   }
 }
 
@@ -240,7 +240,7 @@ export function GraphCanvas() {
     const repulsion = prefersReducedMotion ? 0.0 : 1500;
     const spring = prefersReducedMotion ? 0.0 : 0.003;
     const restLength = 120;
-    const mouseAttract = prefersReducedMotion ? 0.0 : 0.03;
+    const mouseAttract = 0.0; // Disabled cursor repulsion for stable nodes interaction
     const mouseRadius = prefersReducedMotion ? 0.0 : 180;
 
     // Center gravity

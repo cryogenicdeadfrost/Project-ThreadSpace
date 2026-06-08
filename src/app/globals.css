@@ -8,23 +8,23 @@
 /* ---------- Core Theme Tokens ---------- */
 :root {
   /* Background layers */
-  --bg-deep: #05080f;
-  --bg-surface: #0b1120;
-  --bg-elevated: #111b30;
-  --bg-card: #152038;
-  --bg-hover: #1a2845;
+  --bg-deep: #0c0a0f;       /* Rich warm dark charcoal-purple */
+  --bg-surface: #14111a;    /* Warm surface slate */
+  --bg-elevated: #1e1927;   /* Elevated background */
+  --bg-card: #272233;       /* Card background */
+  --bg-hover: #332c42;      /* Hover background */
 
   /* Foreground */
-  --fg-primary: #e8ecf4;
-  --fg-secondary: #8892a8;
-  --fg-muted: #4d5873;
-  --fg-accent: #db2777;  /* Magenta */
+  --fg-primary: #f5f3f7;    /* Soft warm white */
+  --fg-secondary: #b3aebf;  /* Subdued warm slate-grey */
+  --fg-muted: #787285;      /* Muted warm grey */
+  --fg-accent: #db2777;     /* Magenta */
 
-  /* Hot-Cold Ramp - Brighter purple/indigo color profile */
-  --cold: #c084fc;       /* purple-400 */
-  --cold-teal: #60d4c8;  /* teal-400 */
-  --warm: #f59e0b;       /* amber-500 */
-  --hot: #f43f5e;        /* rose-500 */
+  /* Hot-Cold Ramp - Friendly warm subjected gradient ramp */
+  --cold: #c084fc;       /* Lavender: purple-400 */
+  --cold-teal: #f472b6;  /* Soft rose/pink: pink-400 */
+  --warm: #fb923c;       /* Soft peach/orange: orange-400 */
+  --hot: #fb7185;        /* Warm rose/coral: rose-400 */
 
   /* Brand */
   --brand-primary: #ec4899; /* Hot Pink */
@@ -32,9 +32,9 @@
   --brand-glow-strong: rgba(236, 72, 153, 0.3);
 
   /* Glass */
-  --glass-bg: rgba(11, 17, 32, 0.65);
+  --glass-bg: rgba(20, 17, 26, 0.65);
   --glass-border: rgba(236, 72, 153, 0.12);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .light {
@@ -354,9 +354,9 @@ body {
 /* ---------- Background Mesh ---------- */
 .bg-mesh {
   background-image:
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(96, 212, 200, 0.06), transparent),
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(56, 189, 248, 0.04), transparent),
-    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(249, 112, 102, 0.03), transparent);
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(192, 132, 252, 0.07), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(251, 146, 60, 0.05), transparent),
+    radial-gradient(ellipse 50% 60% at 60% 80%, rgba(251, 113, 133, 0.04), transparent);
 }
 
 /* ---------- React Flow Overrides ---------- */

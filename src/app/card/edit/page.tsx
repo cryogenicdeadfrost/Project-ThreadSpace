@@ -73,6 +73,18 @@ function TagInput({
   const [asyncSuggestions, setAsyncSuggestions] = useState<string[]>([]);
   const [searching, setSearching] = useState(false);
   const apiCache = useRef<Record<string, string[]>>({});
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Close suggestions on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Debounced API search with caching
   useEffect(() => {
@@ -184,7 +196,7 @@ function TagInput({
       </div>
 
       {/* Input */}
-      <div className="relative">
+      <div ref={containerRef} className="relative">
         <input
           type="text"
           value={input}

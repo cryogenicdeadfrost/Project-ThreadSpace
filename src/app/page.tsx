@@ -66,13 +66,13 @@ const DEMO_EDGES: GraphEdge[] = DEMO_NODES.flatMap((node) =>
 function tempToColor(t: number): string {
   if (t < 0.33) {
     const p = t / 0.33;
-    return lerpColor([56, 189, 248], [45, 212, 191], p);
+    return lerpColor([192, 132, 252], [244, 114, 182], p);
   } else if (t < 0.66) {
     const p = (t - 0.33) / 0.33;
-    return lerpColor([45, 212, 191], [245, 158, 11], p);
+    return lerpColor([244, 114, 182], [251, 146, 60], p);
   } else {
     const p = (t - 0.66) / 0.34;
-    return lerpColor([245, 158, 11], [249, 112, 102], p);
+    return lerpColor([251, 146, 60], [251, 113, 133], p);
   }
 }
 
